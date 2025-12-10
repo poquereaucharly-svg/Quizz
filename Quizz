@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Psycho-test Littérature Française</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: auto; padding: 20px; }
+    h1 { text-align: center; }
+    .question { margin-bottom: 25px; }
+    .result { font-size: 1.2em; margin-top: 30px; padding: 20px; border: 2px solid #000; }
+    button { padding: 10px 20px; font-size: 1em; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h1>Psycho-test : Quel est ton couple modèle de la littérature française ?</h1>
+
+<form id="quiz">
+
+    <!-- QUESTION 1 -->
+    <div class="question">
+        <p><strong>1. Quel type de relation te rassure le plus ?</strong></p>
+        <label><input type="radio" name="q1" value="bovary"> Une relation stable, même si elle manque un peu d’aventure.</label><br>
+        <label><input type="radio" name="q1" value="camus"> Une relation simple et naturelle, sans pression.</label><br>
+        <label><input type="radio" name="q1" value="manon"> Une relation intense où les sentiments sont vécus pleinement.</label>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question">
+        <p><strong>2. Comment réagis-tu face aux conflits dans le couple ?</strong></p>
+        <label><input type="radio" name="q2" value="bovary"> Tu évites le conflit, quitte à fuir un peu la réalité.</label><br>
+        <label><input type="radio" name="q2" value="camus"> Tu restes calme, rationnel·le, parfois un peu détaché·e.</label><br>
+        <label><input type="radio" name="q2" value="manon"> Tu exprimes tes émotions très directement et intensément.</label>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="question">
+        <p><strong>3. À quoi ressemble ton week-end idéal en couple ?</strong></p>
+        <label><input type="radio" name="q3" value="bovary"> Une vie confortable : maison, repas tranquille, cocooning.</label><br>
+        <label><input type="radio" name="q3" value="camus"> Une activité simple : plage, balade, café en terrasse.</label><br>
+        <label><input type="radio" name="q3" value="manon"> Une aventure nature : randonnée, sensations fortes, solitude à deux.</label>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="question">
+        <p><strong>4. Dans un couple, tu cherches surtout :</strong></p>
+        <label><input type="radio" name="q4" value="bovary"> La sécurité et la stabilité du quotidien.</label><br>
+        <label><input type="radio" name="q4" value="camus"> Une liberté douce, sans contraintes inutiles.</label><br>
+        <label><input type="radio" name="q4" value="manon"> La passion et la profondeur émotionnelle.</label>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="question">
+        <p><strong>5. Quel défaut te dérange le moins chez l’autre ?</strong></p>
+        <label><input type="radio" name="q5" value="bovary"> Le besoin d’évasion ou de rêver d’une autre vie.</label><br>
+        <label><input type="radio" name="q5" value="camus"> Le manque d’expression émotionnelle.</label><br>
+        <label><input type="radio" name="q5" value="manon"> La jalousie ou la possessivité.</label>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div class="question">
+        <p><strong>6. Comment décrirais-tu ton rapport à l’amour ?</strong></p>
+        <label><input type="radio" name="q6" value="bovary"> Une quête d’idéal, parfois difficile à atteindre.</label><br>
+        <label><input type="radio" name="q6" value="camus"> Un sentiment simple, vécu dans le moment présent.</label><br>
+        <label><input type="radio" name="q6" value="manon"> Un absolu qui peut devenir vital.</label>
+    </div>
+
+    <!-- QUESTION 7 -->
+    <div class="question">
+        <p><strong>7. Ton critère principal pour dire qu’un couple fonctionne :</strong></p>
+        <label><input type="radio" name="q7" value="bovary"> Une vie construite ensemble, même imparfaite.</label><br>
+        <label><input type="radio" name="q7" value="camus"> La simplicité : pas besoin de se compliquer la vie.</label><br>
+        <label><input type="radio" name="q7" value="manon"> L’intensité : si je n’aime pas fort, je n’aime pas.</label>
+    </div>
+
+    <button type="button" onclick="calculerResultat()">Voir mon résultat</button>
+
+</form>
+
+<div id="resultat" class="result" style="display:none;"></div>
+
+<script>
+function calculerResultat() {
+    const reponses = document.querySelectorAll("input[type=radio]:checked");
+    if (reponses.length < 7) {
+        alert("Merci de répondre à toutes les questions !");
+        return;
+    }
+
+    let scores = { bovary: 0, camus: 0, manon: 0 };
+
+    reponses.forEach(r => {
+        scores[r.value]++;
+    });
+
+    let resultatFinal = "";
+    let max = Math.max(scores.bovary, scores.camus, scores.manon);
+
+    if (scores.bovary === max) {
+        resultatFinal = "<h2>✨ Ton couple modèle : Emma & Charles Bovary (Flaubert)</h2>"
+                      + "<p>Tu recherches avant tout la stabilité et une vie construite à deux. "
+                      + "Tu as besoin d’un cadre rassurant, même si tu rêves parfois d’un ailleurs.</p>";
+    }
+    else if (scores.camus === max) {
+        resultatFinal = "<h2>🌿 Ton couple modèle : Meursault & Marie (Camus)</h2>"
+                      + "<p>Tu es quelqu’un de simple, qui aime l’amour tranquille, naturel, sans artifices. "
+                      + "Tu privilégies la liberté et la spontanéité.</p>";
+    }
+    else {
+        resultatFinal = "<h2>🔥 Ton couple modèle : Jean & Manon (Manon des Sources)</h2>"
+                      + "<p>Tu vis l’amour comme une force profonde et totale. "
+                      + "Tu cherches l’intensité, la sincérité et la passion vraie.</p>";
+    }
+
+    document.getElementById("resultat").innerHTML = resultatFinal;
+    document.getElementById("resultat").style.display = "block";
+}
+</script>
+
+</body>
+</html>
